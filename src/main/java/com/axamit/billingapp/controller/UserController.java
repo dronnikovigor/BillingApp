@@ -1,19 +1,21 @@
 package com.axamit.billingapp.controller;
 
 import com.axamit.billingapp.model.User;
-import com.axamit.billingapp.repository.UserRepository;
+import com.axamit.billingapp.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Controller
 public class UserController {
-    @Autowired
-    private UserRepository userRepository;
 
+    private UserService service;
+
+    @Autowired
+    public void setUserService(UserService service) {
+        this.service = service;
+    }
     /**
      * Redirect to /users if / requested.
      *
@@ -45,7 +47,7 @@ public class UserController {
      */
     @PostMapping("/user")
     public String createUser(User user, Model model) {
-        userRepository.save(user);
+        service.saveUser(user);
         return "redirect:/user/" + user.getId();
     }
 
@@ -58,7 +60,7 @@ public class UserController {
      */
     @GetMapping("/user/{id}")
     public String getUserById(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userRepository.findById(id).orElse(new User()));
+        model.addAttribute("user", service.findById(id).orElse(new User()));
         return "user";
     }
 
@@ -70,7 +72,7 @@ public class UserController {
      */
     @GetMapping("/users")
     public String getUsers(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", service.findAll());
         return "users";
     }
 
@@ -83,7 +85,7 @@ public class UserController {
      */
     @GetMapping("/user/edit/{id}")
     public String editUser(@PathVariable Long id, Model model) {
-        model.addAttribute("user", userRepository.findById(id).orElse(new User()));
+        model.addAttribute("user", service.findById(id).orElse(new User()));
         return "userform";
     }
 
@@ -95,7 +97,7 @@ public class UserController {
      */
     @PostMapping("/user/{id}")
     public String updateUser(User user) {
-        userRepository.save(user);
+        service.saveUser(user);
         return "redirect:/user/" + user.getId();
     }
 
@@ -106,8 +108,8 @@ public class UserController {
      * @return
      */
     @GetMapping("/user/delete/{id}")
-    public String deleteUser(@PathVariable Long id) {
-        userRepository.deleteById(id);
+    public String deleteUser(@PathVariable long id) {
+        service.deleteById(id);
         return "redirect:/users";
     }
 
@@ -119,14 +121,9 @@ public class UserController {
      * @return
      */
     @PostMapping("/users/search")
-    public String searchUserByPhone(@RequestParam(value="phone") Long phone, Model model) {
-        List<User> userList = userRepository.findByPhone(phone);
-        if (userList.size() == 1)
-            return "redirect:/user/" + userList.get(0).getId();
-        else
-        {
-            model.addAttribute("users", userList);
-            return "users";
-        }
+    public String searchUserByPhone(@RequestParam(value="phone") long phone, Model model) {
+        Iterable<User> userList = service.findByPhone(phone);
+        model.addAttribute("users", userList);
+        return "users";
     }
 }

@@ -11,13 +11,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private Long phone;
+    private long phone;
     private String email;
     private String password;
     private double bill;
     public User() {
     }
-    public User(String name, Long phone, String email, String password, double bill) {
+    public User(String name, long phone, String email, String password, double bill) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -41,11 +41,11 @@ public class User {
         this.name = name;
     }
 
-    public Long getPhone() {
+    public long getPhone() {
         return phone;
     }
 
-    public void setPhone(Long phone) {
+    public void setPhone(long phone) {
         this.phone = phone;
     }
 

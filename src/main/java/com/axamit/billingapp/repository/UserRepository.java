@@ -2,8 +2,6 @@ package com.axamit.billingapp.repository;
 import com.axamit.billingapp.model.User;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
 public interface UserRepository extends CrudRepository<User, Long> {
-    List<User> findByPhone(Long phone);
+    Iterable<User> findByPhone(long phone);
 }
