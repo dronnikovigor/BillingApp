@@ -11,10 +11,10 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    private Long bill;
+    private double bill;
     public User() {
     }
-    public User(Long id, String name, Long bill) {
+    public User(Long id, String name, double bill) {
         this.id = id;
         this.name = name;
         this.bill = bill;
@@ -31,10 +31,10 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-    public Long getBill() {
+    public double getBill() {
         return bill;
     }
-    public void setBill(Long bill) {
+    public void setBill(double bill) {
         this.bill = bill;
     }
 }
