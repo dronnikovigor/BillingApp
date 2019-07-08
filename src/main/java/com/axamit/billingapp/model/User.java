@@ -1,20 +1,30 @@
 package com.axamit.billingapp.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "USERS")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "ID")
     private Long id;
+
+    @Column(name = "NAME", nullable = false)
     private String name;
+
+    @Column(name = "PHONE", nullable = false)
     private long phone;
+
+    @Column(name = "EMAIL", nullable = false)
     private String email;
+
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
+
+    @Column(name = "BILL", nullable = false)
     private double bill;
+
     public User() {
     }
     public User(String name, long phone, String email, String password, double bill) {

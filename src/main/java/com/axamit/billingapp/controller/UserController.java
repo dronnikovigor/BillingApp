@@ -121,9 +121,13 @@ public class UserController {
      * @return
      */
     @PostMapping("/users/search")
-    public String searchUserByPhone(@RequestParam(value="phone") long phone, Model model) {
-        Iterable<User> userList = service.findByPhone(phone);
-        model.addAttribute("users", userList);
+    public String searchUserByPhone(@RequestParam(value="phone", required=false) Long phone, Model model) {
+        if (phone != null) {
+            Iterable<User> userList = service.findByPhone(phone);
+            model.addAttribute("users", userList);
+        }
+        else
+            model.addAttribute("users", service.findAll());
         return "users";
     }
 }
