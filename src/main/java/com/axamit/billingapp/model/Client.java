@@ -3,8 +3,8 @@ package com.axamit.billingapp.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USERS")
-public class User {
+@Table(name = "CLIENTS")
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
@@ -25,9 +25,9 @@ public class User {
     @Column(name = "BILL", nullable = false)
     private double bill;
 
-    public User() {
+    public Client() {
     }
-    public User(String name, long phone, String email, String password, double bill) {
+    public Client(String name, long phone, String email, String password, double bill) {
         this.name = name;
         this.phone = phone;
         this.email = email;
