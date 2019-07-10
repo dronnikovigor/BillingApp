@@ -10,9 +10,10 @@
     <table class="table">
         <tr>
             <th colspan="2"><h2>Clients</h2></th>
-            <th colspan="4" style="text-align:right">
+            <th colspan="4" style="text-align:right; vertical-align: middle">
                 <form th:action="@{/logout}" method="post">
                     <div class="form-inline float-right">
+                        <span class="align-middle mr-2" th:text="${#httpServletRequest.getUserPrincipal().getName()}"></span>
                         <button type="submit" class="btn btn-default">Logout</button>
                     </div>
                 </form>
@@ -41,7 +42,7 @@
             <td colspan="4">
                 <form th:action="@{/clients/search}" method="post">
                     <div class="form-inline float-right">
-                        <input type="text" class="form-control" name="phone" placeholder="Phone">
+                        <input type="text" class="form-control mr-2" name="phone" placeholder="Phone">
                         <button type="submit" class="btn btn-default">Search</button>
                     </div>
                 </form>
