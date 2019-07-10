@@ -22,7 +22,7 @@ public class ClientController {
      * @param model
      * @return
      */
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @GetMapping("/")
     public String index(Model model) {
         return "redirect:/clients";
     }
